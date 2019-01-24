@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Solver;
+package SolverBFS;
 
 import java.util.ArrayList;
 
@@ -11,13 +11,18 @@ import java.util.ArrayList;
  *
  * @author tooth
  */
-class GameState implements Comparable<GameState>{
+class GameStateBFS implements Comparable<GameStateBFS>{
        
     private int[] state;
     private ArrayList<Character> moves;
     private int zeroPosition;
-
-    public GameState(int[] state, ArrayList<Character> moves, int zeroPosition) {
+    /**
+     * 
+     * @param state Current state of the game as an array, where arr[0] is top left corner.
+     * @param moves A list of made moves. "U D L R"
+     * @param zeroPosition  The position of the "empty" slot
+     */
+    public GameStateBFS(int[] state, ArrayList<Character> moves, int zeroPosition) {
         this.state = state;
         this.moves = moves;
         this.zeroPosition = zeroPosition;
@@ -40,8 +45,8 @@ class GameState implements Comparable<GameState>{
     }
 
     @Override
-    public int compareTo(GameState o) {
-        return this.getNumberOfMadeMoves()-o.getNumberOfMadeMoves();
+    public int compareTo(GameStateBFS o) {
+        return this.getNumberOfMadeMoves() - o.getNumberOfMadeMoves();
     }
     
 }
