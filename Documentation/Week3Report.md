@@ -2,7 +2,7 @@
 
 ## What I did
 
-Most of this week has been spent trying to resolve  heap space errors. I cannot seem to find what and where Im going wrong in the newly added A* algorithm. Quite a bit of time went into reseaching Manhattan scoring and how that is supposed to work, but I have to say I had very little luck with a default manhattan search. -> Basic manhattan A* took: well I stopped running the test after a minute, cause the inevitable incoming heapspace error. Which is odd since the materials I read online suggest it should work extremly well. where as my verison: manhattan * madeMoves returns the correct answer in 1ms after searching 122 vertices. Which is over 4 seconds faster than the standard BFS. This latter test can be run by running the demo cases in the textbased UI. 
+Most of this week has been spent trying to resolve  heap space errors. I cannot seem to find what and where Im going wrong in the newly added A* algorithm. Quite a bit of time went into reseaching Manhattan scoring and how that is supposed to work, but I have to say I had very little luck with a default manhattan search. -> Basic manhattan A* took: well I stopped running the test after a minute, cause the inevitable incoming heapspace error. Which is odd since the materials I read online suggest it should work extremly well. where as my verison: manhattan * madeMoves returns the correct answer in 1ms after searching 122 vertices. Which is over 4 seconds faster than the standard BFS. This latter test can be run by running the demo cases in the textbased UI. I spent around 20h on this, this week, most of which isn't very visible due to the nature of the issues I was having.
 
 ## What I learned
 
