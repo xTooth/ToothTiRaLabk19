@@ -19,5 +19,5 @@ Also, I didnt remove the gradlefiles just yet, do I really have to remove basica
 Hopefully fix the algorithms and  do some testing aswell as beginning work on datastructures, like the HashSet and PriorityQueue.
 
 
-####Note
+#### Note
 Test coverage is down a bit due to lots of private classes, which I cant test. Hope its still satisfactory. 
