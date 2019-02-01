@@ -1,65 +1,77 @@
 package SolverBFS;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.PriorityQueue;
 
 public class FifteenSolverBFS {
-    
+
     private final int[] solved = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0};
     private PriorityQueue<GameStateBFS> states;
-    
+    private HashSet<int[]> visited;
+
     /**
+     *
      * 
-     * @param unsolved the initial state of the game, as an array of size 16. 
      */
-    public FifteenSolverBFS(int[] unsolved) {
+    public FifteenSolverBFS() {
         states = new PriorityQueue<>();
-        states.add(new GameStateBFS(unsolved, new ArrayList<>(), findZero(unsolved)));
-        if(states.peek().getZeroPosition() == -1){
+        visited = new HashSet<>();
+
+    }
+
+    /**
+     *
+     * @return Returns an ArrayList of the made moves (as characters) to solve
+     * the given gameState.
+     * @param unsolved the initial state of the game, as an array of size 16.
+     */
+    public char[] solve(int[] unsolved) {
+        states.clear();
+        visited.clear();
+        states.add(new GameStateBFS(unsolved, new char[80], findZero(unsolved),0));
+        if (states.peek().getZeroPosition() == -1) {
             System.out.println("UNSOLVABLE, NO EMPTY SPACE");
             states.poll();
         }
-    }
-    
-    /**
-     * 
-     * @return Returns an ArrayList of the made moves (as characters) to solve the given gameState.  
-     */
-    public ArrayList<Character> solve() {
-             
+        int test = 0;
         while (!states.isEmpty()) {
-            
-            GameStateBFS current = states.poll();           
-            
+            test++;
+            GameStateBFS current = states.poll();
+
             if (solved(current)) {
+                System.out.println("Vertices searched: " + test);
                 return current.getMoves();
             }
 
             char[] allowedMoves = getAllowedMoves(current);
             makeAllowedMoves(allowedMoves, current);
-          
+
         }
-        ArrayList<Character> unsolved = new ArrayList<>();
-        return unsolved;
+        
+        return new char[80];
     }
+
     /**
-     * 
+     *
      * @param state Array that depicts the current state of the game.
      * @return True if the game is solved.
      */
     private boolean solved(GameStateBFS state) {
         boolean isSolved = true;
-        for(int i = 0; i<16; i++){
-            if(state.getState()[i] != solved[i]){
+        for (int i = 0; i < 16; i++) {
+            if (state.getState()[i] != solved[i]) {
                 isSolved = false;
             }
         }
         return isSolved;
     }
+
     /**
-     * 
+     *
      * @param current GameState argument. (see GameStateBFS)
-     * @return Returns array of allowed moves based on the position of the "empty" ( 0 ) slot.
+     * @return Returns array of allowed moves based on the position of the
+     * "empty" ( 0 ) slot.
      */
     private char[] getAllowedMoves(GameStateBFS current) {
 
@@ -99,8 +111,9 @@ public class FifteenSolverBFS {
                 return new char[]{'D', 'R'};
         }
     }
+
     /**
-     * 
+     *
      * @param unsolved Array that depicts the current state of the game.
      * @return The index of the empty ( 0 ) block.
      */
@@ -113,22 +126,24 @@ public class FifteenSolverBFS {
         }
         return -1;
     }
+
     /**
-     * 
+     *
      * @param allowedMoves Array of allowed moves, that can be made. ( char[])
-     * @param current The current "node" gameStateBFS object that is to be handled.
+     * @param current The current "node" gameStateBFS object that is to be
+     * handled.
      */
     private void makeAllowedMoves(char[] allowedMoves, GameStateBFS current) {
 
         for (int i = 0; i < allowedMoves.length; i++) {
 
-            ArrayList<Character> madeMoves = (ArrayList<Character>) current.getMoves().clone();
-            madeMoves.add(allowedMoves[i]);
+            char[] madeMoves = current.getMoves().clone();
+            madeMoves[current.getNumberOfMadeMoves()] = allowedMoves[i];
             int[] newState = current.getState().clone();
             int newZeroPos = 0;
 
             switch (allowedMoves[i]) {
-                
+
                 case 'U':
                     newState[current.getZeroPosition()] = current.getState()[current.getZeroPosition() + 4];
                     newState[current.getZeroPosition() + 4] = 0;
@@ -153,8 +168,8 @@ public class FifteenSolverBFS {
                     newZeroPos = current.getZeroPosition() + 1;
                     break;
             }
-            
-            states.add(new GameStateBFS(newState,madeMoves,newZeroPos));
+
+            states.add(new GameStateBFS(newState,madeMoves,newZeroPos,current.getNumberOfMadeMoves()+1));
         }
     }
 

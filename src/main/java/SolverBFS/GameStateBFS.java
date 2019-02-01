@@ -14,18 +14,21 @@ import java.util.ArrayList;
 class GameStateBFS implements Comparable<GameStateBFS>{
        
     private int[] state;
-    private ArrayList<Character> moves;
+    private char[] moves;
     private int zeroPosition;
+    private int movesMade;
     /**
      * 
      * @param state Current state of the game as an array, where arr[0] is top left corner.
      * @param moves A list of made moves. "U D L R"
      * @param zeroPosition  The position of the "empty" slot
+     * @param nmbr The current number of moves made.
      */
-    public GameStateBFS(int[] state, ArrayList<Character> moves, int zeroPosition) {
+    public GameStateBFS(int[] state,char[] moves, int zeroPosition, int nmbr) {
         this.state = state;
         this.moves = moves;
         this.zeroPosition = zeroPosition;
+        this.movesMade = nmbr;
     }
 
     public int getZeroPosition() {
@@ -33,14 +36,14 @@ class GameStateBFS implements Comparable<GameStateBFS>{
     }
 
     public int getNumberOfMadeMoves() {
-        return moves.size();
+        return movesMade;
     }
 
     public int[] getState() {
         return state;
     }
 
-    public ArrayList<Character> getMoves() {
+    public char[] getMoves() {
         return moves;
     }
 

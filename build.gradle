@@ -36,7 +36,7 @@ jacocoTestReport {
 afterEvaluate {
         classDirectories = files(classDirectories.files.collect {
                 fileTree(dir: it,
-                    exclude: ['**FifteenSolverMain/Main**'                              
+                    exclude: ['**FifteenSolverMain/**'                              
                     ])
             })
     }

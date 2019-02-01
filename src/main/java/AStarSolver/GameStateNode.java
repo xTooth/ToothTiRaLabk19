@@ -32,28 +32,45 @@ public class GameStateNode implements Comparable<GameStateNode> {
 
     @Override
     public int compareTo(GameStateNode other) {
-        if(this.score -other.score == 0){
-            return this.nrMovesMade - other.nrMovesMade;
-        }
-        return this.score - other.score;
+            return this.score - other.score;
     }
 
+    /**
+     *
+     * @return the current gameState
+     */
     public int[] getState() {
         return state;
     }
 
+    /**
+     *
+     * @return Current score for this state.
+     */
     public int getScore() {
         return score;
     }
 
+    /**
+     *
+     * @return Location for the empty block to avoid searching for it every time.
+     */
     public int getZeroPos() {
         return zeroPos;
     }
 
+    /**
+     *
+     * @return The amount of moves made at this state.
+     */
     public int getNrMovesMade() {
         return nrMovesMade;
     }
 
+    /**
+     *
+     * @return The moves "U D L R" that have been made.
+     */
     public char[] getMoves() {
         return moves;
     }
@@ -88,9 +105,12 @@ public class GameStateNode implements Comparable<GameStateNode> {
             return false;
         }
         final GameStateNode other = (GameStateNode) obj;
-        if (!Arrays.equals(this.state, other.state)) {
-            return false;
+        for(int i = 0; i<this.state.length;i++){
+            if(state[i] != other.getState()[i]){
+                return false;
+            }
         }
+        
         return true;
     }
 

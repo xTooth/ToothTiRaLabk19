@@ -15,12 +15,12 @@ class MyGameState implements Comparable<MyGameState>{
     private char previousMove;
     /**
      * 
-     * @param score
-     * @param state
-     * @param madeMoves
-     * @param movesMade
-     * @param zeroPosition 
-     * @param previousMove
+     * @param score Current score of the state
+     * @param state current positions of the blocks in the game as an int[]
+     * @param madeMoves Array of what moves have been made so far
+     * @param movesMade Amount of moves made so far
+     * @param zeroPosition  location of the empty space
+     * @param previousMove previous move made.
      */
     public MyGameState(int score, int[] state, char[] madeMoves, int movesMade, int zeroPosition, char previousMove) {
         this.score = score;

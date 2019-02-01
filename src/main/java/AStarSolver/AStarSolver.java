@@ -15,20 +15,28 @@ import java.util.PriorityQueue;
  */
 public class AStarSolver {
 
-    private HashSet<int[]> visited;
+    private HashSet<GameStateNode> visited;
     private PriorityQueue<GameStateNode> nodes;
     private ManhattanScoreCounter scorer;
     private int[] solved;
 
+    /**
+     *
+     */
     public AStarSolver() {
         nodes = new PriorityQueue<>();
         visited = new HashSet<>();
         scorer = new ManhattanScoreCounter();
-        solved = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+        solved = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0};
     }
 
+    /**
+     *
+     * @param beginningState initial unsolved input (puzzle state)
+     * @return char[] of required moves to solve puzzle
+     */
     public char[] solve(int[] beginningState) {
-        
+
         nodes.clear();
         visited.clear();
 
@@ -39,17 +47,21 @@ public class AStarSolver {
         }
 
         nodes.add(new GameStateNode(beginningState, scorer.countScore(beginningState, 0), zeroPos, 0, new char[80]));
-        int i = 0;
-        while (!nodes.isEmpty() && i<500) {
-            System.out.println("Loop initialized");
-            i++;
+        int test = 0;
+        while (!nodes.isEmpty()) {
+            test++;
             GameStateNode current = nodes.poll();
-            System.out.println(current);
-            if (isSolved(current)) {
-                System.out.println(current);
-                return current.getMoves();
+            if (current.getNrMovesMade() < 80) {
+                if (current.getScore() == 0) {
+                    if (isSolved(current)) {
+                        System.out.println("Vertices searched: " + test);
+                        //System.out.println(current);
+                        return current.getMoves();
+                    }
+                }
+                addAllowedMoves(getAllowedMoves(current.getZeroPos()), current);
+
             }
-            addAllowedMoves(getAllowedMoves(current.getZeroPos()), current);
         }
 
         return new char[]{'U', 'N', 'S', 'O', 'L', 'V', 'A', 'B', 'L', 'E'};
@@ -65,7 +77,7 @@ public class AStarSolver {
     }
 
     private boolean isSolved(GameStateNode current) {
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < current.getState().length; i++) {
             if (current.getState()[i] != solved[i]) {
                 return false;
             }
@@ -114,40 +126,36 @@ public class AStarSolver {
             switch (allowedMoves[i]) {
 
                 case 'U':
-                    System.out.println("u");
                     newState[current.getZeroPos()] = current.getState()[current.getZeroPos() + 4];
                     newState[current.getZeroPos() + 4] = 0;
                     newZeroPos = current.getZeroPos() + 4;
                     break;
 
                 case 'D':
-                    System.out.println("d");
                     newState[current.getZeroPos()] = current.getState()[current.getZeroPos() - 4];
                     newState[current.getZeroPos() - 4] = 0;
                     newZeroPos = current.getZeroPos() - 4;
                     break;
 
                 case 'R':
-                    System.out.println("r");
                     newState[current.getZeroPos()] = current.getState()[current.getZeroPos() - 1];
                     newState[current.getZeroPos() - 1] = 0;
                     newZeroPos = current.getZeroPos() - 1;
                     break;
 
                 default:
-                    System.out.println("l");
                     newState[current.getZeroPos()] = current.getState()[current.getZeroPos() + 1];
                     newState[current.getZeroPos() + 1] = 0;
                     newZeroPos = current.getZeroPos() + 1;
                     break;
 
             }
+            GameStateNode newN = new GameStateNode(newState, scorer.countScore(newState, current.getNrMovesMade() + 1), newZeroPos, current.getNrMovesMade() + 1, madeMoves);
             if (!visited.contains(newState)) {
-                nodes.add(new GameStateNode(newState, scorer.countScore(newState, current.getNrMovesMade() + 1), newZeroPos, current.getNrMovesMade() + 1, madeMoves));
-               // visited.add(newState);
-                System.out.println("ADDED");
+                visited.add(newN);
+                nodes.add(newN);
             }
         }
-        System.out.println("NODE DONE");
+
     }
 }

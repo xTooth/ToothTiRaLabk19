@@ -18,7 +18,11 @@ public class ManhattanScoreCounter {
      * its correct position. The way this should be read is int[slot][value of
      * block in slot]. So number 5 in slot 1 would return a value of 1. since it
      * is 1 move away from its correct position. We do not calculate the value
-     * of 0. 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 0
+     * of 0.
+     *  1  2  3  4 
+     *  5  6  7  8
+     *  9 10 11 12 
+     * 13 14 15  0
      */
     private final int[][] scores = new int[][]{
         //0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 block      
@@ -40,12 +44,17 @@ public class ManhattanScoreCounter {
         {0, 6, 5, 4, 3, 5, 4, 3, 2, 4, 3, 2, 1, 3, 2, 1}, //15
     };
 
+    /**
+     *
+     * @param state Current gameState
+     * @param moves number of moves made total.
+     * @return the new calculated score for the gameState.
+     */
     public int countScore(int[] state, int moves){
         int score = 0;
         for(int i = 0;i<state.length;i++){
             score += scores[i][state[i]];
         }
-        System.out.println("Returned score:" + score + " State: " + Arrays.toString(state));
-        return score;
+        return score * moves;
     }
 }

@@ -30,8 +30,9 @@ public class MySolver {
         states.clear();
 
         states.add(new MyGameState(counter.getInitialScore(unsolved), unsolved, new char[80], 0, getZeroPosition(unsolved), 'S'));
+        int test = 0;
         while (!states.isEmpty()) {
-
+            test++;
             MyGameState current = states.poll();
 
             if (current.getZeroPosition() == -1) {
@@ -39,6 +40,7 @@ public class MySolver {
             }
 
             if (solved(current)) {
+                System.out.println("Vertices searched: " + test);
                 return current.getMadeMoves();
             }
 

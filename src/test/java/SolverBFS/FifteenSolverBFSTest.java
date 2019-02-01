@@ -1,9 +1,8 @@
 
 package SolverBFS;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import static org.junit.Assert.assertEquals;
+import org.junit.Assert;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class FifteenSolverBFSTest {
@@ -12,22 +11,32 @@ public class FifteenSolverBFSTest {
     
     @Test
     public void FifteenSolverWorksWithSolvedArray(){
-        this.solver = new FifteenSolverBFS(solved);
-        ArrayList<Character> moves = new ArrayList<>();        
-        assertEquals(solver.solve(), moves);
+        this.solver = new FifteenSolverBFS();
+                
+        Assert.assertArrayEquals(solver.solve(solved), new char[80]);
     }
     
     @Test
     public void findZeroWorksWithInCorrectTypeInput(){
-        this.solver = new FifteenSolverBFS(new int[]{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1});
-        ArrayList<Character> moves = new ArrayList<>();        
-        assertEquals(solver.solve(), moves);
+        this.solver = new FifteenSolverBFS();               
+        Assert.assertArrayEquals(solver.solve(new int[]{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}), new char[80]);
     }
     
     @Test
     public void FifteenSolverBFSWorksWithUnSolvedArray(){
-        FifteenSolverBFS solver = new FifteenSolverBFS(new int[]{5,2,7,3,6,1,0,4,9,10,11,8,13,14,15,12});
-        ArrayList<Character> moves = new ArrayList<>(Arrays.asList('D', 'R', 'U', 'R', 'D', 'L', 'L', 'L', 'U', 'U', 'U'));        
-        assertEquals(solver.solve(), moves);
+        FifteenSolverBFS solver = new FifteenSolverBFS();
+        char[] solversResult = solver.solve(new int[]{5, 2, 7, 3, 6, 1, 0, 4, 9, 10, 11, 8, 13, 14, 15, 12});
+        char[] moves = new char[]{'D', 'R', 'U', 'R', 'D', 'L', 'L', 'L', 'U', 'U', 'U'};
+        boolean works = true;
+        for (int i = 0; i < moves.length; i++) {
+            if (moves[i] != solversResult[i]) {
+                works = false;
+                break;
+            }
+        }
+        if (solversResult[moves.length] != '\u0000') {
+            works = false;
+        }
+        assertTrue(works);
     }
 }

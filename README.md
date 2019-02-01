@@ -16,3 +16,5 @@
 [Week One](https://github.com/xTooth/ToothTiRaLabk19/blob/master/Documentation/Week1Report.md)
 
 [Week Two](https://github.com/xTooth/ToothTiRaLabk19/blob/master/Documentation/Week2Report.md)
+
+[Week Three](https://github.com/xTooth/ToothTiRaLabk19/blob/master/Documentation/Week3Report.md)
