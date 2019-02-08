@@ -8,6 +8,7 @@ package FifteenSolverMain;
 import MySolver.MySolver;
 import SolverBFS.FifteenSolverBFS;
 import AStarSolver.AStarSolver;
+import java.util.Arrays;
 
 /**
  *
@@ -34,6 +35,11 @@ class Solvers {
                 return mySolver.solve(unsolved);
             }
             case 3: {
+                return aStar.solve(unsolved);
+            }
+            case 4: {
+                System.out.println(Arrays.toString(bFS.solve(unsolved)));
+                System.out.println(Arrays.toString(mySolver.solve(unsolved)));
                 return aStar.solve(unsolved);
             }
             default: {

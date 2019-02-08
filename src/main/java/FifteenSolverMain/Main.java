@@ -7,7 +7,7 @@ package FifteenSolverMain;
 public class Main {
 
     public static void main(String[] args) {
-
+        
         TextBasedUI ui = new TextBasedUI();
         ui.run();
     }

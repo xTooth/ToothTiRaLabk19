@@ -5,8 +5,7 @@
  */
 package AStarSolver;
 
-import java.util.Arrays;
-import java.util.HashSet;
+import DataStructures.HashingishTable;
 import java.util.PriorityQueue;
 
 /**
@@ -15,7 +14,7 @@ import java.util.PriorityQueue;
  */
 public class AStarSolver {
 
-    private HashSet<GameStateNode> visited;
+    private HashingishTable visited;
     private PriorityQueue<GameStateNode> nodes;
     private ManhattanScoreCounter scorer;
     private int[] solved;
@@ -25,7 +24,7 @@ public class AStarSolver {
      */
     public AStarSolver() {
         nodes = new PriorityQueue<>();
-        visited = new HashSet<>();
+        visited = new HashingishTable();
         scorer = new ManhattanScoreCounter();
         solved = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0};
     }
@@ -152,7 +151,7 @@ public class AStarSolver {
             }
             GameStateNode newN = new GameStateNode(newState, scorer.countScore(newState, current.getNrMovesMade() + 1), newZeroPos, current.getNrMovesMade() + 1, madeMoves);
             if (!visited.contains(newState)) {
-                visited.add(newN);
+                visited.add(newState);
                 nodes.add(newN);
             }
         }

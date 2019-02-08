@@ -1,5 +1,6 @@
 package SolverBFS;
 
+import DataStructures.HashingishTable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.PriorityQueue;
@@ -8,7 +9,7 @@ public class FifteenSolverBFS {
 
     private final int[] solved = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0};
     private PriorityQueue<GameStateBFS> states;
-    private HashSet<int[]> visited;
+    private HashingishTable visited;
 
     /**
      *
@@ -16,7 +17,7 @@ public class FifteenSolverBFS {
      */
     public FifteenSolverBFS() {
         states = new PriorityQueue<>();
-        visited = new HashSet<>();
+        visited = new HashingishTable();
 
     }
 
@@ -168,8 +169,10 @@ public class FifteenSolverBFS {
                     newZeroPos = current.getZeroPosition() + 1;
                     break;
             }
-
+            if(!visited.contains(newState)){
             states.add(new GameStateBFS(newState,madeMoves,newZeroPos,current.getNumberOfMadeMoves()+1));
+            visited.add(newState);
+            }
         }
     }
 

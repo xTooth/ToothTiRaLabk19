@@ -31,12 +31,13 @@ public class TextBasedUI {
     public void run() {
         boolean keepGoing = true;
         System.out.println("Welcome to the textbased solver! \n"
-                    + " This is just a simple application designed to speed up testing of the application before it has a graphics based UI.\n");
+                + " This is just a simple application designed to speed up testing of the application before it has a graphics based UI.\n");
         while (keepGoing) {
             System.out.println(" Commands:\n"
                     + " 1 -> Run demo cases \n"
                     + " 2 -> Input own case \n"
-                    + " 3 -> Quit");
+                    + " 3 -> Quit \n"
+                    + " 4 -> Test randomly shuffled case");
             int command;
 
             while (true) {
@@ -57,9 +58,13 @@ public class TextBasedUI {
                     runUserInput();
                     break;
                 }
-                default: {
+                case 3: {
                     System.out.println("Good bye");
                     keepGoing = false;
+                    break;
+                }
+                default: {
+                    runRandom();
                     break;
                 }
 
@@ -141,8 +146,25 @@ public class TextBasedUI {
         System.out.println("Choose algorithm to run: 1 -> BFS , 2-> My solver, 3 -> A*, 4-> All solvers");
         while (true) {
             try {
-                System.out.println(Arrays.toString(solver.solve(state,Integer.parseInt(scanner.nextLine()))));
+                System.out.println(Arrays.toString(solver.solve(state, Integer.parseInt(scanner.nextLine()))));
 
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Not a number");
+            }
+
+        }
+    }
+
+    private void runRandom() {
+        
+        Shuffler shuffler = new Shuffler(40);
+        int[] state = shuffler.shuffle();
+        
+        System.out.println("Choose algorithm to run: 1 -> BFS , 2-> My solver, 3 -> A*, 4-> All solvers");
+        while (true) {
+            try {
+                System.out.println(Arrays.toString(solver.solve(state, Integer.parseInt(scanner.nextLine()))));
                 break;
             } catch (NumberFormatException e) {
                 System.out.println("Not a number");
