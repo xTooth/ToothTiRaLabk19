@@ -11,6 +11,8 @@
 
 [Definition Document](https://github.com/xTooth/ToothTiRaLabk19/blob/master/Documentation/Definition_Document.md)
 
+[Testing](https://github.com/xTooth/ToothTiRaLabk19/blob/master/Documentation/TestingDoc.md)
+
 #### Weekly Reports
 
 [Week One](https://github.com/xTooth/ToothTiRaLabk19/blob/master/Documentation/Week1Report.md)
