@@ -1,5 +1,6 @@
 package MySolver;
 
+import ParentSolver.ParentSolver;
 import java.util.PriorityQueue;
 
 /**
@@ -7,9 +8,9 @@ import java.util.PriorityQueue;
  *
  * @author Toothy
  */
-public class MySolver {
+public class MySolver extends ParentSolver{
 
-    private final int[] solved = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0};
+    
     private PriorityQueue<MyGameState> states;
     private ScoreCounter counter;
 
@@ -29,7 +30,7 @@ public class MySolver {
     public char[] solve(int[] unsolved) {
         states.clear();
 
-        states.add(new MyGameState(counter.getInitialScore(unsolved), unsolved, new char[80], 0, getZeroPosition(unsolved), 'S'));
+        states.add(new MyGameState(counter.getInitialScore(unsolved), unsolved, new char[80], 0, super.findZero(unsolved), 'S'));
         int test = 0;
         while (!states.isEmpty()) {
             test++;
@@ -39,52 +40,18 @@ public class MySolver {
                 break;
             }
 
-            if (solved(current)) {
+            if (super.solved(current.getState())) {
                 System.out.println("Vertices searched: " + test);
                 return current.getMadeMoves();
             }
 
             if (current.getMovesMade() < 80) {
-                makeAllowedMoves(getAllowedMoves(current), current);
+                makeAllowedMoves(super.getAllowedMoves(current.getZeroPosition()), current);
             }
         }
 
         char[] unsolvable = {'U', 'N', 'S', 'O', 'L', 'V', 'A', 'B', 'L', 'E'};
         return unsolvable;
-
-    }
-
-    /**
-     *
-     * @param unsolved State of game
-     * @return The position of the empty ( 0 ) block
-     */
-    public int getZeroPosition(int[] unsolved) {
-
-        for (int i = 0; i < 16; i++) {
-            if (unsolved[i] == 0) {
-                return i;
-            }
-        }
-
-        return -1;
-
-    }
-
-    /**
-     *
-     * @param state Current state of the game.
-     * @return True if the game is solved.
-     */
-    private boolean solved(MyGameState state) {
-
-        for (int i = 0; i < 16; i++) {
-            if (state.getState()[i] != solved[i]) {
-                return false;
-            }
-        }
-
-        return true;
 
     }
 
@@ -101,7 +68,7 @@ public class MySolver {
             madeMoves[state.getMovesMade()] = moves[i];
             int[] newState = state.getState().clone();
             int newZeroPos = 0;
-            if (isAllowedthisTime(moves[i], state.getPreviousMove())) {
+            if (super.isAllowedthisTime(moves[i], state.getPreviousMove())) {
                 switch (moves[i]) {
 
                     case 'U':
@@ -136,63 +103,7 @@ public class MySolver {
         }
     }
 
-    /**
-     *
-     * @param state Current gameState as an array
-     * @return A Character array of the allowed moves ( U,D,R,L)
-     */
-    private char[] getAllowedMoves(MyGameState state) {
-        int zero = state.getZeroPosition();
 
-        switch (zero) {
-            case 0:
-                return new char[]{'U', 'L'};
-            case 1:
-            case 2:
-                return new char[]{'U', 'L', 'R'};
-            case 3:
-                return new char[]{'U', 'R'};
-            case 4:
-            case 8:
-                return new char[]{'U', 'D', 'L'};
-            case 5:
-            case 6:
-            case 9:
-            case 10:
-                return new char[]{'U', 'D', 'R', 'L'};
-            case 7:
-            case 11:
-                return new char[]{'U', 'D', 'R'};
-            case 12:
-                return new char[]{'D', 'L'};
-            case 13:
-            case 14:
-                return new char[]{'D', 'R', 'L'};
-            default:
-                return new char[]{'D', 'R'};
-        }
-    }
-    /**
-     * To stop going backwards
-     * @param move new move being handled
-     * @param previousMove move made before this one
-     * @return True if not moving backwards.
-     */
-    private boolean isAllowedthisTime(char move, char previousMove) {
 
-        if (move == 'U' && previousMove == 'D') {
-            return false;
-        }
-        if (move == 'D' && previousMove == 'U') {
-            return false;
-        }
-        if (move == 'L' && previousMove == 'R') {
-            return false;
-        }
-        if (move == 'R' && previousMove == 'L') {
-            return false;
-        }
-        return true;
-    }
 
 }

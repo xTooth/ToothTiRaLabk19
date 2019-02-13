@@ -6,18 +6,19 @@
 package AStarSolver;
 
 import DataStructures.HashingishTable;
+import ParentSolver.ParentSolver;
 import java.util.PriorityQueue;
 
 /**
  *
  * @author tooth
  */
-public class AStarSolver {
+public class AStarSolver extends ParentSolver{
 
     private HashingishTable visited;
     private PriorityQueue<GameStateNode> nodes;
     private ManhattanScoreCounter scorer;
-    private int[] solved;
+    
 
     /**
      *
@@ -26,7 +27,7 @@ public class AStarSolver {
         nodes = new PriorityQueue<>();
         visited = new HashingishTable();
         scorer = new ManhattanScoreCounter();
-        solved = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0};
+        
     }
 
     /**
@@ -39,7 +40,7 @@ public class AStarSolver {
         nodes.clear();
         visited.clear();
 
-        int zeroPos = findZero(beginningState);
+        int zeroPos = super.findZero(beginningState);
 
         if (zeroPos < 0) {
             return new char[]{'U', 'N', 'S', 'O', 'L', 'V', 'A', 'B', 'L', 'E'};
@@ -52,7 +53,7 @@ public class AStarSolver {
             GameStateNode current = nodes.poll();
             if (current.getNrMovesMade() < 80) {
                 if (current.getScore() == 0) {
-                    if (isSolved(current)) {
+                    if (super.solved(current.getState())) {
                         System.out.println("Vertices searched: " + test);
                         //System.out.println(current);
                         return current.getMoves();
@@ -66,61 +67,13 @@ public class AStarSolver {
         return new char[]{'U', 'N', 'S', 'O', 'L', 'V', 'A', 'B', 'L', 'E'};
     }
 
-    private int findZero(int[] beginningState) {
-        for (int i = 0; i < beginningState.length; i++) {
-            if (beginningState[i] == 0) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    private boolean isSolved(GameStateNode current) {
-        for (int i = 0; i < current.getState().length; i++) {
-            if (current.getState()[i] != solved[i]) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private char[] getAllowedMoves(int zeroPos) {
-        switch (zeroPos) {
-            case 0:
-                return new char[]{'U', 'L'};
-            case 1:
-            case 2:
-                return new char[]{'U', 'L', 'R'};
-            case 3:
-                return new char[]{'U', 'R'};
-            case 4:
-            case 8:
-                return new char[]{'U', 'D', 'L'};
-            case 5:
-            case 6:
-            case 9:
-            case 10:
-                return new char[]{'U', 'D', 'R', 'L'};
-            case 7:
-            case 11:
-                return new char[]{'U', 'D', 'R'};
-            case 12:
-                return new char[]{'D', 'L'};
-            case 13:
-            case 14:
-                return new char[]{'D', 'R', 'L'};
-            default:
-                return new char[]{'D', 'R'};
-        }
-    }
-
     private void addAllowedMoves(char[] allowedMoves, GameStateNode current) {
         for (int i = 0; i < allowedMoves.length; i++) {
 
             char[] madeMoves = (char[]) current.getMoves().clone();
             madeMoves[current.getNrMovesMade()] = allowedMoves[i];
             int[] newState = current.getState().clone();
-            int newZeroPos = 0;
+            int newZeroPos;
 
             switch (allowedMoves[i]) {
 
