@@ -41,13 +41,13 @@ public class HashingishTable {
                 int hash = hash(add);
                 Node n = table[hash];
                 if (n == null) {
-                    table[hash] = new Node(hash, add, null);
+                    table[hash] = new Node( add, null);
                     size++;
                 } else {
                     while (n.getNext() != null) {
                         n = n.getNext();
                     }
-                    n.setNext(new Node(hash, add, null));
+                    n.setNext(new Node( add, null));
                     size++;
                 }
             }
@@ -61,7 +61,7 @@ public class HashingishTable {
      */
     public boolean contains(int[] state) {
         int hash = hash(state);
-        Node node = new Node(hash, state, null);
+        Node node = new Node(state, null);
         Node n = table[hash];
         if (n == null) {
             return false;
@@ -95,17 +95,16 @@ public class HashingishTable {
     private class Node {
 
         private Node next;
-        private final int hash;
+        
         private final int[] state;
 
-        public Node(int hash, int[] state, Node next) {
-            this.hash = hash;
+        public Node(int[] state, Node next) {
             this.state = state;
             this.next = next;
         }
 
         public void setNext(Node n) {
-            this.next = n;
+            this.next = n;           
         }
 
         public Node getNext() {

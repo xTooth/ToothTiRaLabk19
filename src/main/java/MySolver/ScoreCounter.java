@@ -28,7 +28,7 @@ class ScoreCounter {
      * @param state int[], State of the game (before the move)
      * @param currentScore Integer, Score before the move.
      * @param madeMoves Integer, amount of made moves after the move.
-     * @return 
+     * @return  new score for the state
      */
     public int getNewScore(char move, int zeroPosition, int[] state, int currentScore, int madeMoves) {
         int newScore = currentScore;

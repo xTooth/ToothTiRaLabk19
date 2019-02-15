@@ -6,6 +6,10 @@ package FifteenSolverMain;
  */
 public class Main {
 
+    /**
+     *
+     * @param args yes?
+     */
     public static void main(String[] args) {
         
         TextBasedUI ui = new TextBasedUI();

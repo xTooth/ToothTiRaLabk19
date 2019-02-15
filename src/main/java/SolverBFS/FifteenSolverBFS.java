@@ -1,9 +1,13 @@
 package SolverBFS;
 
 import DataStructures.HashingishTable;
-import ParentSolver.ParentSolver;
+import Generalizer.ParentSolver;
 import java.util.PriorityQueue;
 
+/**
+ *
+ * @author Toothy
+ */
 public class FifteenSolverBFS extends ParentSolver{
 
     
@@ -12,7 +16,7 @@ public class FifteenSolverBFS extends ParentSolver{
 
     /**
      *
-     * 
+     * initializes new BFS solver
      */
     public FifteenSolverBFS() {
         states = new PriorityQueue<>();

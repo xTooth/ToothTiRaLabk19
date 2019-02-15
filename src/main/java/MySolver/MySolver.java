@@ -1,6 +1,6 @@
 package MySolver;
 
-import ParentSolver.ParentSolver;
+import Generalizer.ParentSolver;
 import java.util.PriorityQueue;
 
 /**

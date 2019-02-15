@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ParentSolver;
+package Generalizer;
 
 /**
  * The solver superclass for generic methods.
@@ -14,6 +14,11 @@ public class ParentSolver {
 
     private final int[] solved = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0};
     
+    /**
+     *
+     * @param zero
+     * @return
+     */
     public char[] getAllowedMoves(int zero) {
         switch (zero) {
             case 0:

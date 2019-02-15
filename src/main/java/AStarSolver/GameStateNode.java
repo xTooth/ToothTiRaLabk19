@@ -1,12 +1,13 @@
 package AStarSolver;
 
+import Generalizer.GameState;
 import java.util.Arrays;
 
 /**
  *
  * @author tooth
  */
-public class GameStateNode implements Comparable<GameStateNode> {
+public class GameStateNode implements Comparable<GameStateNode>, GameState {
 
     private final int[] state;
     private final int score;
@@ -39,6 +40,7 @@ public class GameStateNode implements Comparable<GameStateNode> {
      *
      * @return the current gameState
      */
+    @Override
     public int[] getState() {
         return state;
     }
@@ -47,6 +49,7 @@ public class GameStateNode implements Comparable<GameStateNode> {
      *
      * @return Current score for this state.
      */
+    @Override
     public int getScore() {
         return score;
     }
@@ -55,6 +58,7 @@ public class GameStateNode implements Comparable<GameStateNode> {
      *
      * @return Location for the empty block to avoid searching for it every time.
      */
+    @Override
     public int getZeroPos() {
         return zeroPos;
     }
@@ -63,6 +67,7 @@ public class GameStateNode implements Comparable<GameStateNode> {
      *
      * @return The amount of moves made at this state.
      */
+    @Override
     public int getNrMovesMade() {
         return nrMovesMade;
     }
@@ -71,6 +76,7 @@ public class GameStateNode implements Comparable<GameStateNode> {
      *
      * @return The moves "U D L R" that have been made.
      */
+    @Override
     public char[] getMoves() {
         return moves;
     }
@@ -112,6 +118,11 @@ public class GameStateNode implements Comparable<GameStateNode> {
         }
         
         return true;
+    }
+
+    @Override
+    public int compareTo(GameState other) {
+        return this.score - other.getScore();
     }
 
 }

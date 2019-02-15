@@ -5,8 +5,10 @@
  */
 package AStarSolver;
 
+import DataStructures.BinaryHeapThingy;
 import DataStructures.HashingishTable;
-import ParentSolver.ParentSolver;
+import Generalizer.GameState;
+import Generalizer.ParentSolver;
 import java.util.PriorityQueue;
 
 /**
@@ -16,15 +18,15 @@ import java.util.PriorityQueue;
 public class AStarSolver extends ParentSolver{
 
     private HashingishTable visited;
-    private PriorityQueue<GameStateNode> nodes;
+    private BinaryHeapThingy nodes;
     private ManhattanScoreCounter scorer;
     
 
     /**
-     *
+     * initializes new AStarSolver
      */
     public AStarSolver() {
-        nodes = new PriorityQueue<>();
+        nodes = new BinaryHeapThingy();
         visited = new HashingishTable();
         scorer = new ManhattanScoreCounter();
         
@@ -50,7 +52,7 @@ public class AStarSolver extends ParentSolver{
         int test = 0;
         while (!nodes.isEmpty()) {
             test++;
-            GameStateNode current = nodes.poll();
+            GameState current = nodes.poll();
             if (current.getNrMovesMade() < 80) {
                 if (current.getScore() == 0) {
                     if (super.solved(current.getState())) {
@@ -59,7 +61,7 @@ public class AStarSolver extends ParentSolver{
                         return current.getMoves();
                     }
                 }
-                addAllowedMoves(getAllowedMoves(current.getZeroPos()), current);
+                addAllowedMoves(getAllowedMoves(current.getZeroPos()),(GameStateNode) current);
 
             }
         }

@@ -1,18 +1,23 @@
 package FifteenSolverMain;
 
+import Generalizer.ParentSolver;
 import java.util.Random;
 
 /**
  *
  * @author Toothy
  */
-public class Shuffler {
+public class Shuffler extends ParentSolver{
 
-    private char[] moves;
-    private int[] state;
-    private Random random;
+    private final char[] moves;
+    private final int[] state;
+    private final Random random;
     private int zeroPos;
 
+    /**
+     *
+     * @param amountOfShuffles the number of shuffles made to solved game
+     */
     public Shuffler(int amountOfShuffles) {
         moves = new char[amountOfShuffles];
         state = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0};
@@ -20,9 +25,13 @@ public class Shuffler {
         zeroPos = 15;
     }
 
+    /**
+     *
+     * @return shuffled gamestate.
+     */
     public int[] shuffle() {
         for (int i = 0; i < moves.length; i++) {
-            char[] allowedMoves = getAllowedMoves(zeroPos);
+            char[] allowedMoves = super.getAllowedMoves(zeroPos);
             int r = random.nextInt(allowedMoves.length);
 
             switch (allowedMoves[r]) {
@@ -76,36 +85,6 @@ public class Shuffler {
         System.out.println("");
 
         return state;
-    }
-
-    private char[] getAllowedMoves(int zeroPos) {
-        switch (zeroPos) {
-            case 0:
-                return new char[]{'U', 'L'};
-            case 1:
-            case 2:
-                return new char[]{'U', 'L', 'R'};
-            case 3:
-                return new char[]{'U', 'R'};
-            case 4:
-            case 8:
-                return new char[]{'U', 'D', 'L'};
-            case 5:
-            case 6:
-            case 9:
-            case 10:
-                return new char[]{'U', 'D', 'R', 'L'};
-            case 7:
-            case 11:
-                return new char[]{'U', 'D', 'R'};
-            case 12:
-                return new char[]{'D', 'L'};
-            case 13:
-            case 14:
-                return new char[]{'D', 'R', 'L'};
-            default:
-                return new char[]{'D', 'R'};
-        }
     }
 
 }

@@ -18,7 +18,7 @@ public class TextBasedUI {
     private final Solvers solver;
 
     /**
-     *
+     * initializes new text based UI
      */
     public TextBasedUI() {
         scanner = new Scanner(System.in);
@@ -157,10 +157,10 @@ public class TextBasedUI {
     }
 
     private void runRandom() {
-        
+
         Shuffler shuffler = new Shuffler(40);
         int[] state = shuffler.shuffle();
-        
+
         System.out.println("Choose algorithm to run: 1 -> BFS , 2-> My solver, 3 -> A*, 4-> All solvers");
         while (true) {
             try {
