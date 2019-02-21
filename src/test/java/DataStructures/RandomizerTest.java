@@ -31,16 +31,15 @@ public class RandomizerTest {
     @Test
     public void RandomizerDoesReturnRandomNumbers(){
         int[] numbers = new int[10];
-        for(int i = 0; i<100000;i++){
+        for(int i = 0; i<10000;i++){
             numbers[r.getRandomInt(10)] = 1;
-        }
-        boolean works = true;
+        }       
+        int unfound = 0;
         for(Integer i : numbers){
             if(i != 1){
-                works = false;
-                break;
+                unfound++;                         
             }
         }
-        assertTrue(works);
+        assertTrue(unfound<3);
     }
 }
