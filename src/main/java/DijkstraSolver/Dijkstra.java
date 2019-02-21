@@ -3,17 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DjikstaSolver;
+package DijkstraSolver;
 
 import DataStructures.BinaryHeapThingy;
 import DataStructures.HashingishTable;
 import Generalizer.ParentSolver;
 
+
 /**
  *
  * @author Toothy
  */
-public class Djikstra extends ParentSolver{
+public class Dijkstra extends ParentSolver{
     
     private BinaryHeapThingy states;
     private HashingishTable visited;
@@ -21,7 +22,7 @@ public class Djikstra extends ParentSolver{
     /**
      * Initializes new djikstra solver.
      */
-    public Djikstra(){
+    public Dijkstra(){
         states = new BinaryHeapThingy();
         visited = new HashingishTable();
     }

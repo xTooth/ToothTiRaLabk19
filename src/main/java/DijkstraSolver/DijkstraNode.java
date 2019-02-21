@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DjikstaSolver;
+package DijkstraSolver;
 
 import Generalizer.GameState;
 
@@ -11,7 +11,7 @@ import Generalizer.GameState;
  *
  * @author Toothy
  */
-public class DjikstraNode implements GameState{
+public class DijkstraNode implements GameState{
     
     private int[] state;
     private int score;
@@ -27,7 +27,7 @@ public class DjikstraNode implements GameState{
      * @param nrMovesMade amount of moves made
      * @param movesMade the moves made represented by U;D;R;L;
      */
-    public DjikstraNode(int[] state, int score, int zeroPos, int nrMovesMade, char[] movesMade) {
+    public DijkstraNode(int[] state, int score, int zeroPos, int nrMovesMade, char[] movesMade) {
         this.state = state;
         this.score = score;
         this.zeroPos = zeroPos;
