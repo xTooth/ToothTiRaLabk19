@@ -16,8 +16,8 @@ public class ParentSolver {
     
     /**
      *
-     * @param zero
-     * @return
+     * @param zero position of zero in gamestate
+     * @return the allowed moves from said position
      */
     public char[] getAllowedMoves(int zero) {
         switch (zero) {

@@ -5,13 +5,14 @@
  */
 package SolverBFS;
 
+import Generalizer.GameState;
 import java.util.ArrayList;
 
 /**
  *
  * @author tooth
  */
-class GameStateBFS implements Comparable<GameStateBFS>{
+class GameStateBFS implements Comparable<GameStateBFS>, GameState{
        
     private int[] state;
     private char[] moves;
@@ -31,25 +32,39 @@ class GameStateBFS implements Comparable<GameStateBFS>{
         this.movesMade = nmbr;
     }
 
-    public int getZeroPosition() {
-        return zeroPosition;
-    }
-
-    public int getNumberOfMadeMoves() {
-        return movesMade;
-    }
-
+    @Override
     public int[] getState() {
         return state;
     }
 
+    @Override
     public char[] getMoves() {
         return moves;
     }
 
     @Override
     public int compareTo(GameStateBFS o) {
-        return this.getNumberOfMadeMoves() - o.getNumberOfMadeMoves();
+        return this.getScore() - o.getScore();
+    }
+
+    @Override
+    public int getScore() {
+        return movesMade;
+    }
+
+    @Override
+    public int getZeroPos() {
+        return zeroPosition;
+    }
+
+    @Override
+    public int getNrMovesMade() {
+        return movesMade;
+    }
+
+    @Override
+    public int compareTo(GameState other) {
+        return movesMade - other.getNrMovesMade();
     }
     
 }

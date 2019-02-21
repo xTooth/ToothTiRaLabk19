@@ -67,6 +67,10 @@ public class BinaryHeapThingy {
         return tmp;
 
     }
+    
+    public GameState peek(){
+        return states[0];
+    }
 
     /**
      * empties and resets heap.
