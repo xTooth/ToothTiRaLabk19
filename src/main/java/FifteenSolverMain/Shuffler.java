@@ -1,7 +1,8 @@
 package FifteenSolverMain;
 
+import DataStructures.Randomizer;
 import Generalizer.ParentSolver;
-import java.util.Random;
+
 
 /**
  *
@@ -11,7 +12,7 @@ public class Shuffler extends ParentSolver{
 
     private final char[] moves;
     private final int[] state;
-    private final Random random;
+    private final Randomizer random;
     private int zeroPos;
 
     /**
@@ -21,7 +22,7 @@ public class Shuffler extends ParentSolver{
     public Shuffler(int amountOfShuffles) {
         moves = new char[amountOfShuffles];
         state = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0};
-        random = new Random();
+        random = new Randomizer();
         zeroPos = 15;
     }
 
@@ -32,7 +33,7 @@ public class Shuffler extends ParentSolver{
     public int[] shuffle() {
         for (int i = 0; i < moves.length; i++) {
             char[] allowedMoves = super.getAllowedMoves(zeroPos);
-            int r = random.nextInt(allowedMoves.length);
+            int r = random.getRandomInt(allowedMoves.length);
 
             switch (allowedMoves[r]) {
                 case 'U':
