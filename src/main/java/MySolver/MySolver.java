@@ -1,7 +1,7 @@
 package MySolver;
 
 import Generalizer.ParentSolver;
-import java.util.PriorityQueue;
+import DataStructures.BinaryHeapThingy;
 
 /**
  * this is supposed to solve the game using something "like" an A* algorithm.
@@ -11,14 +11,14 @@ import java.util.PriorityQueue;
 public class MySolver extends ParentSolver{
 
     
-    private PriorityQueue<MyGameState> states;
-    private ScoreCounter counter;
+    private final BinaryHeapThingy states;
+    private final ScoreCounter counter;
 
     /**
      * Creates new puzzle Solver.
      */
     public MySolver() {
-        states = new PriorityQueue<>();
+        states = new BinaryHeapThingy();
         counter = new ScoreCounter();
     }
 
@@ -34,19 +34,19 @@ public class MySolver extends ParentSolver{
         int test = 0;
         while (!states.isEmpty()) {
             test++;
-            MyGameState current = states.poll();
+            MyGameState current = (MyGameState) states.poll();
 
-            if (current.getZeroPosition() == -1) {
+            if (current.getZeroPos() == -1) {
                 break;
             }
 
             if (super.solved(current.getState())) {
                 System.out.println("Vertices searched: " + test);
-                return current.getMadeMoves();
+                return current.getMoves();
             }
 
-            if (current.getMovesMade() < 80) {
-                makeAllowedMoves(super.getAllowedMoves(current.getZeroPosition()), current);
+            if (current.getNrMovesMade() < 80) {
+                makeAllowedMoves(super.getAllowedMoves(current.getZeroPos()), current);
             }
         }
 
@@ -64,41 +64,41 @@ public class MySolver extends ParentSolver{
 
         for (int i = 0; i < moves.length; i++) {
 
-            char[] madeMoves = (char[]) state.getMadeMoves().clone();
-            madeMoves[state.getMovesMade()] = moves[i];
+            char[] madeMoves = (char[]) state.getMoves().clone();
+            madeMoves[state.getNrMovesMade()] = moves[i];
             int[] newState = state.getState().clone();
             int newZeroPos = 0;
             if (super.isAllowedthisTime(moves[i], state.getPreviousMove())) {
                 switch (moves[i]) {
 
                     case 'U':
-                        newState[state.getZeroPosition()] = state.getState()[state.getZeroPosition() + 4];
-                        newState[state.getZeroPosition() + 4] = 0;
-                        newZeroPos = state.getZeroPosition() + 4;
+                        newState[state.getZeroPos()] = state.getState()[state.getZeroPos() + 4];
+                        newState[state.getZeroPos() + 4] = 0;
+                        newZeroPos = state.getZeroPos() + 4;
                         break;
 
                     case 'D':
-                        newState[state.getZeroPosition()] = state.getState()[state.getZeroPosition() - 4];
-                        newState[state.getZeroPosition() - 4] = 0;
-                        newZeroPos = state.getZeroPosition() - 4;
+                        newState[state.getZeroPos()] = state.getState()[state.getZeroPos() - 4];
+                        newState[state.getZeroPos() - 4] = 0;
+                        newZeroPos = state.getZeroPos() - 4;
                         break;
 
                     case 'R':
-                        newState[state.getZeroPosition()] = state.getState()[state.getZeroPosition() - 1];
-                        newState[state.getZeroPosition() - 1] = 0;
-                        newZeroPos = state.getZeroPosition() - 1;
+                        newState[state.getZeroPos()] = state.getState()[state.getZeroPos() - 1];
+                        newState[state.getZeroPos() - 1] = 0;
+                        newZeroPos = state.getZeroPos() - 1;
                         break;
 
                     default:
-                        newState[state.getZeroPosition()] = state.getState()[state.getZeroPosition() + 1];
-                        newState[state.getZeroPosition() + 1] = 0;
-                        newZeroPos = state.getZeroPosition() + 1;
+                        newState[state.getZeroPos()] = state.getState()[state.getZeroPos() + 1];
+                        newState[state.getZeroPos() + 1] = 0;
+                        newZeroPos = state.getZeroPos() + 1;
                         break;
                 }
 
                 states.add(new MyGameState(counter.getNewScore(
-                        moves[i], state.getZeroPosition(), state.getState(), state.getScore(), state.getMovesMade() + 1),
-                        newState, madeMoves, state.getMovesMade() + 1, newZeroPos, state.getPreviousMove()));
+                        moves[i], state.getZeroPos(), state.getState(), state.getScore(), state.getNrMovesMade() + 1),
+                        newState, madeMoves, state.getNrMovesMade() + 1, newZeroPos, state.getPreviousMove()));
             }
         }
     }

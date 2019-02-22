@@ -37,7 +37,6 @@ public class FifteenSolverBFS extends ParentSolver{
         visited.clear();
         GameStateBFS newState = new GameStateBFS(unsolved, new char[80], super.findZero(unsolved),0);
         states.add((GameState) newState);
-        System.out.println("BFS peek zeroPos:" + states.peek().getZeroPos());
         if (states.peek().getZeroPos() == -1) {
             System.out.println("UNSOLVABLE, NO EMPTY SPACE");
             states.poll();

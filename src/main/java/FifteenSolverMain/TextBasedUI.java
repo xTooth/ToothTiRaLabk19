@@ -5,7 +5,8 @@
  */
 package FifteenSolverMain;
 
-import java.util.Arrays;
+
+import DataStructures.ArrayMethods;
 import java.util.Scanner;
 
 /**
@@ -16,6 +17,7 @@ public class TextBasedUI {
 
     private final Scanner scanner;
     private final Solvers solver;
+    private final ArrayMethods array;
 
     /**
      * initializes new text based UI
@@ -23,6 +25,7 @@ public class TextBasedUI {
     public TextBasedUI() {
         scanner = new Scanner(System.in);
         solver = new Solvers();
+        array = new ArrayMethods();
     }
 
     /**
@@ -82,7 +85,7 @@ public class TextBasedUI {
 
         System.out.println("Started Solving with BFS");
         long startTime = System.nanoTime();
-        System.out.println(Arrays.toString(solver.solve(new int[]{
+        System.out.println(array.charArrayToString(solver.solve(new int[]{
             5, 2, 7, 3,
             6, 1, 11, 4,
             9, 10, 0, 8,
@@ -94,12 +97,12 @@ public class TextBasedUI {
 
         System.out.println("Started Solving with MySolver");
         startTime = System.nanoTime();
-        System.out.println(solver.solve(new int[]{
+        System.out.println(array.charArrayToString(solver.solve(new int[]{
             5, 2, 7, 3,
             6, 1, 11, 4,
             9, 10, 0, 8,
             13, 14, 15, 12
-        }, 2));
+        }, 2)));
         endTime = System.nanoTime();
 
         long duration2 = (endTime - startTime) / 1000000;
@@ -107,7 +110,7 @@ public class TextBasedUI {
         System.out.println("");
         System.out.println("Started  Solving with A*");
         startTime = System.nanoTime();
-        System.out.println(Arrays.toString(solver.solve(new int[]{
+        System.out.println(array.charArrayToString(solver.solve(new int[]{
             5, 2, 7, 3,
             6, 1, 11, 4,
             9, 10, 0, 8,
@@ -118,6 +121,7 @@ public class TextBasedUI {
 
         duration = (endTime - startTime) / 1000000;
         System.out.println("Time Required " + duration + " ms");
+        System.out.println("");
     }
 
     private void runUserInput() {
@@ -146,7 +150,7 @@ public class TextBasedUI {
         System.out.println("Choose algorithm to run: 1 -> BFS , 2-> My solver, 3 -> A*, 4-> All solvers");
         while (true) {
             try {
-                System.out.println(Arrays.toString(solver.solve(state, Integer.parseInt(scanner.nextLine()))));
+                System.out.println(array.charArrayToString(solver.solve(state, Integer.parseInt(scanner.nextLine()))));
 
                 break;
             } catch (NumberFormatException e) {
@@ -164,7 +168,7 @@ public class TextBasedUI {
         System.out.println("Choose algorithm to run: 1 -> BFS , 2-> My solver, 3 -> A*, 4-> All solvers");
         while (true) {
             try {
-                System.out.println(Arrays.toString(solver.solve(state, Integer.parseInt(scanner.nextLine()))));
+                System.out.println(array.charArrayToString(solver.solve(state, Integer.parseInt(scanner.nextLine()))));
                 break;
             } catch (NumberFormatException e) {
                 System.out.println("Not a number");

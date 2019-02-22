@@ -6,7 +6,6 @@
 package SolverBFS;
 
 import Generalizer.GameState;
-import java.util.ArrayList;
 
 /**
  *

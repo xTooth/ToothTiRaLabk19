@@ -1,5 +1,6 @@
 package FifteenSolverMain;
 
+import DataStructures.ArrayMethods;
 import DataStructures.Randomizer;
 import Generalizer.ParentSolver;
 
@@ -9,7 +10,7 @@ import Generalizer.ParentSolver;
  * @author Toothy
  */
 public class Shuffler extends ParentSolver{
-
+    private final ArrayMethods array;
     private final char[] moves;
     private final int[] state;
     private final Randomizer random;
@@ -24,6 +25,7 @@ public class Shuffler extends ParentSolver{
         state = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0};
         random = new Randomizer();
         zeroPos = 15;
+        array = new ArrayMethods();
     }
 
     /**
@@ -68,9 +70,7 @@ public class Shuffler extends ParentSolver{
         }
 
         System.out.println("shuffling done");
-        for (int i = 0; i < moves.length; i++) {
-            System.out.print(moves[i]);
-        }
+            System.out.print(array.charArrayToString(moves));      
         System.out.println("");
         for (int i = 0; i < 16; i++) {
             if (state[i] > 9) {

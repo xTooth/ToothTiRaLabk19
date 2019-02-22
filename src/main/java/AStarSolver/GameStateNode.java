@@ -1,14 +1,14 @@
 package AStarSolver;
 
+import DataStructures.ArrayMethods;
 import Generalizer.GameState;
-import java.util.Arrays;
 
 /**
  *
  * @author tooth
  */
 public class GameStateNode implements Comparable<GameStateNode>, GameState {
-
+    private final ArrayMethods array;
     private final int[] state;
     private final int score;
     private final int zeroPos;
@@ -29,6 +29,7 @@ public class GameStateNode implements Comparable<GameStateNode>, GameState {
         this.zeroPos = zeroPos;
         this.nrMovesMade = nrMovesMade;
         this.moves = moves;
+        this.array= new ArrayMethods();
     }
 
     @Override
@@ -83,13 +84,17 @@ public class GameStateNode implements Comparable<GameStateNode>, GameState {
 
     @Override
     public String toString() {
-        return "moves made =  " + nrMovesMade + " score= " + score + " moves = " + Arrays.toString(moves);
+        return "moves made =  " + nrMovesMade + " score= " + score + " " + array.charArrayToString(moves);
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 53 * hash + Arrays.hashCode(this.state);
+        int stateCode=0;
+        for(int i = 0; i<16;i++){
+            stateCode = (i+1) * this.state[i];
+        }
+        hash = 53 * hash + stateCode;
         return hash;
     }
 

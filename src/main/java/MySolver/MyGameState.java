@@ -1,18 +1,20 @@
 
 package MySolver;
 
+import Generalizer.GameState;
+
 /**
  * Depicts the state of the game, listing a weighed score based on the amount of moves made and the current state of the game.
  * @author Toothy
  */
-class MyGameState implements Comparable<MyGameState>{
+class MyGameState implements Comparable<MyGameState>, GameState{
     
-    private int score;
-    private int[] state;
-    private char[] madeMoves;
-    private int movesMade;
-    private int zeroPosition;
-    private char previousMove;
+    private final int score;
+    private final int[] state;
+    private final char[] madeMoves;
+    private final int movesMade;
+    private final int zeroPosition;
+    private final char previousMove;
     /**
      * 
      * @param score Current score of the state
@@ -34,30 +36,39 @@ class MyGameState implements Comparable<MyGameState>{
     public char getPreviousMove() {
         return previousMove;
     }
-
-    public int getZeroPosition() {
-        return zeroPosition;
-    }
-
+    @Override
     public int getScore() {
         return score;
     }
 
+    @Override
     public int[] getState() {
         return state;
     }
-
-    public char[] getMadeMoves() {
-        return madeMoves;
+    
+    @Override
+    public int compareTo(MyGameState other) {
+        return this.score - other.score;
     }
 
-    public int getMovesMade() {
+    @Override
+    public int getZeroPos() {
+        return zeroPosition;
+    }
+
+    @Override
+    public int getNrMovesMade() {
         return movesMade;
     }
 
     @Override
-    public int compareTo(MyGameState other) {
-        return this.score - other.score;
+    public char[] getMoves() {
+        return madeMoves;
+    }
+
+    @Override
+    public int compareTo(GameState other) {
+        return this.score - other.getScore();
     }
     
     
