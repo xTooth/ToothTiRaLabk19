@@ -27,6 +27,8 @@
 
 [Week Five](https://github.com/xTooth/ToothTiRaLabk19/blob/master/Documentation/Week5Report.md)
 
+[Week Six](https://github.com/xTooth/ToothTiRaLabk19/blob/master/Documentation/Week6Report.md)
+
 
 #### Instructions
 
