@@ -104,8 +104,8 @@ public class AStarSolver extends ParentSolver{
 
             }
             GameStateNode newN = new GameStateNode(newState, scorer.countScore(newState, current.getNrMovesMade() + 1), newZeroPos, current.getNrMovesMade() + 1, madeMoves);
-            if (!visited.contains(newState)) {
-                visited.add(newState);
+            if (!visited.contains(newState,newZeroPos)) {
+                visited.add(newState,newZeroPos);
                 nodes.add(newN);
             }
         }

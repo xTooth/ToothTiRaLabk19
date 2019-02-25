@@ -24,7 +24,7 @@ public class HashingishTable {
     }
 
     /**
-     * clears the current table of linkedlists.
+     * clears the current table of trees.
      */
     public void clear() {
         table = new Node[1241];
@@ -34,20 +34,34 @@ public class HashingishTable {
     /**
      *
      * @param add the new gameState to be added
+     * @param zeroPos location of zero in new gameState
      */
-    public void add(int[] add) {
+    public void add(int[] add, int zeroPos) {
         if (add != null) {
-            if (!contains(add)) {
+            if (!contains(add, zeroPos)) {
                 int hash = hash(add);
                 Node n = table[hash];
                 if (n == null) {
-                    table[hash] = new Node( add, null);
+                    table[hash] = new Node(add, null, null, zeroPos);
                     size++;
                 } else {
-                    while (n.getNext() != null) {
-                        n = n.getNext();
+                    while (n != null) {
+                        if (zeroPos >= n.zeroPos) {
+                            if (n.getNextRight() != null) {
+                                n = n.getNextRight();
+                            } else {
+                                n.setNextRight(new Node(add, null, null, zeroPos));
+                                break;
+                            }
+                        } else {
+                            if (n.getNextLeft() != null) {
+                                n = n.getNextLeft();
+                            } else {
+                                n.setNextLeft(new Node(add, null, null, zeroPos));
+                                break;
+                            }
+                        }
                     }
-                    n.setNext(new Node( add, null));
                     size++;
                 }
             }
@@ -57,11 +71,12 @@ public class HashingishTable {
     /**
      *
      * @param state GameState that is compared to hashedTable contents.
+     * @param zeroPos zeroPosition of node.
      * @return true if the current state has been visited, otherwise false
      */
-    public boolean contains(int[] state) {
+    public boolean contains(int[] state, int zeroPos) {
         int hash = hash(state);
-        Node node = new Node(state, null);
+        Node node = new Node(state, null, null, zeroPos);
         Node n = table[hash];
         if (n == null) {
             return false;
@@ -70,7 +85,11 @@ public class HashingishTable {
             if (n.equals(node)) {
                 return true;
             } else {
-                n = n.getNext();
+                if (zeroPos >= n.getZeroPos()) {
+                    n = n.getNextRight();
+                } else {
+                    n = n.getNextLeft();
+                }
             }
         }
         return false;
@@ -94,24 +113,41 @@ public class HashingishTable {
 
     private class Node {
 
-        private Node next;
-        
+        private Node nextRight;
+        private Node nextLeft;
+
         private final int[] state;
 
-        public Node(int[] state, Node next) {
+        private final int zeroPos;
+
+        public Node(int[] state, Node right, Node left, int zeroPos) {
             this.state = state;
-            this.next = next;
+            this.nextRight = right;
+            this.nextLeft = left;
+            this.zeroPos = zeroPos;
         }
 
-        public void setNext(Node n) {
-            this.next = n;           
+        public void setNextRight(Node n) {
+            this.nextRight = n;
         }
 
-        public Node getNext() {
-            return next;
+        public Node getNextRight() {
+            return nextRight;
         }
 
-        public boolean equals(Node other) { 
+        public Node getNextLeft() {
+            return nextLeft;
+        }
+
+        public void setNextLeft(Node n) {
+            this.nextLeft = n;
+        }
+
+        public int getZeroPos() {
+            return this.zeroPos;
+        }
+
+        public boolean equals(Node other) {
             for (int i = 0; i < 16; i++) {
                 if (this.state[i] != other.state[i]) {
                     return false;

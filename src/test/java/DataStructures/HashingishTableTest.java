@@ -22,26 +22,26 @@ public class HashingishTableTest {
 
     @Test
     public void emptyTableContainsWorks() {
-        assertTrue(!this.table.contains(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0}));
+        assertTrue(!this.table.contains(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0},15));
     }
 
     @Test
     public void emptyTableAddingAndContainsWorks() {
-        this.table.add(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0});
-        assertTrue(this.table.contains(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0}));
+        this.table.add(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0},15);
+        assertTrue(this.table.contains(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0},15));
     }
 
     @Test
     public void clearingTableWorks() {
-        this.table.add(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0});
+        this.table.add(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0},15);
         this.table.clear();
-        assertTrue(!this.table.contains(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0}) && table.getSize() == 0);
+        assertTrue(!this.table.contains(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0},15) && table.getSize() == 0);
     }
     
     @Test
     public void cantAddSameStateTwice(){
-        this.table.add(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0});
-        this.table.add(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0});
+        this.table.add(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0},15);
+        this.table.add(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0},15);
         assertTrue(table.getSize()==1);
         table.clear();
     }
@@ -49,14 +49,14 @@ public class HashingishTableTest {
     @Test
     public void addingNullDoesntBrakeStuff(){
         table.clear();
-        this.table.add(null);
+        this.table.add(null,0);
         assertTrue(table.getSize() == 0);
     }
     
     @Test
     public void hashCollisionHandledWell(){
-        this.table.add(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0});
-        this.table.add(new int[]{9, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0});
+        this.table.add(new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0},15);
+        this.table.add(new int[]{9, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0},15);
         assertTrue(table.getSize() == 2);
         table.clear();
     }

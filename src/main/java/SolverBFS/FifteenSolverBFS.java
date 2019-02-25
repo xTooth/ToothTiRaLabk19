@@ -5,14 +5,12 @@ import DataStructures.HashingishTable;
 import Generalizer.GameState;
 import Generalizer.ParentSolver;
 
-
 /**
  *
  * @author Toothy
  */
-public class FifteenSolverBFS extends ParentSolver{
+public class FifteenSolverBFS extends ParentSolver {
 
-    
     private final BinaryHeapThingy states;
     private final HashingishTable visited;
 
@@ -35,7 +33,7 @@ public class FifteenSolverBFS extends ParentSolver{
     public char[] solve(int[] unsolved) {
         states.clear();
         visited.clear();
-        GameStateBFS newState = new GameStateBFS(unsolved, new char[80], super.findZero(unsolved),0);
+        GameStateBFS newState = new GameStateBFS(unsolved, new char[80], super.findZero(unsolved), 0);
         states.add((GameState) newState);
         if (states.peek().getZeroPos() == -1) {
             System.out.println("UNSOLVABLE, NO EMPTY SPACE");
@@ -55,7 +53,7 @@ public class FifteenSolverBFS extends ParentSolver{
             makeAllowedMoves(allowedMoves, current);
 
         }
-        
+
         return new char[80];
     }
 
@@ -100,9 +98,9 @@ public class FifteenSolverBFS extends ParentSolver{
                     newZeroPos = current.getZeroPos() + 1;
                     break;
             }
-            if(!visited.contains(newState)){
-            states.add((GameState) new GameStateBFS(newState,madeMoves,newZeroPos,current.getNrMovesMade()+1));
-            visited.add(newState);
+            if (!visited.contains(newState, newZeroPos)) {
+                states.add((GameState) new GameStateBFS(newState, madeMoves, newZeroPos, current.getNrMovesMade() + 1));
+                visited.add(newState, newZeroPos);
             }
         }
     }
