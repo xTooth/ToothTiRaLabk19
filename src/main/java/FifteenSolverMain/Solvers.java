@@ -26,6 +26,7 @@ class Solvers {
         mySolver = new MySolver();
         bFS = new FifteenSolverBFS();
         aStar = new AStarSolver();
+        array = new ArrayMethods();
     }
 
     public char[] solve(int[] unsolved, int choise) {
