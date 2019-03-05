@@ -69,7 +69,7 @@ A*Solver:
                   space: O(|E|) tai O(|V| + |E|)
 
 
-## Perfoemance
+## Performance
 
 ### Initial Performance Testing
 
