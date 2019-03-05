@@ -11,7 +11,7 @@
 
 [Definition Document](https://github.com/xTooth/ToothTiRaLabk19/blob/master/Documentation/Definition_Document.md)
 
-[Execution Document](https://github.com/xTooth/ToothTiRaLabk19/blob/master/Documentation/ExecutionDocument.md)
+[Implementation Document](https://github.com/xTooth/ToothTiRaLabk19/blob/master/Documentation/ExecutionDocument.md)
 
 [Testing](https://github.com/xTooth/ToothTiRaLabk19/blob/master/Documentation/TestingDoc.md)
 
