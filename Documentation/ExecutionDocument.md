@@ -99,7 +99,23 @@ Test system: CPU: i7-8700k @stock, RAM: 16gb DDR4, OS: Windows 10 Professional
 
 ### Testing after datastructure implementations
 
-TODO
+S = searched states
+
+T = time to solve in ms.
+
+
+
+| Algorithm  | Shuffles: 12 | Shuffles: 14  | Shuffles: 16 | Shuffles: 18  | Shuffles: 20 | Shuffles: 22 | Shuffles: 24 | Shuffles: 26 | Shuffles: 28 | Shuffles: 32 |
+| ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |------------------ | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
+| BFS  | S: 16468 T: 52 |  S: 57345 T: 266 |  S: 371336 T: 4807   |  S: 878195 T: 21191   | S: 2496160 T:140426 | Heap overflow |
+| MySolver  |  S: 58406 T: 58   |  S: 407193 T: 632 |  Heap overflow   |
+| A*  |  S: 42 T: 1  |  S: 59 T: 1  |  S: 103 T: 1 |  S: 121 T: 1  | S: 196 T: 1  | S: 358 T: 2  | S: 835 T: 4  | S: 1914 T: 9 | S: 2631 T: 9  | S: 2504 T: 15  |
+
+
+Noteworthy is also that the A* managed to solve a puzzle shuffled 79 times with the scores T:268 and S: 73310. This might have been a fluke though seing as it failed to solve a puzzle that was shuffled 80 times.
+
+![alt text](https://github.com/xTooth/ToothTiRaLabk19/blob/master/Documentation/Pictures/TiraTime.PNG)
+![alt text2](https://github.com/xTooth/ToothTiRaLabk19/blob/master/Documentation/Pictures/TiraVertices.PNG)
 
 ## Deficiensies and Improvements
 
