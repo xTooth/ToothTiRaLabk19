@@ -13,3 +13,4 @@ gradle.properties
 .nb-gradle-properties
 settings.gradle
 ProjectCopy
+.DS_Store
